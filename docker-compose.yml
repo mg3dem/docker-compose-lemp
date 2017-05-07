@@ -36,6 +36,18 @@ services:
       - db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
+      
+  elasticsearch:
+    image: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  
+  beanstalkd:
+    image: schickling/beanstalkd
+    command: beanstalkd -p 11300 -z 524288 -b /tmp
+    ports:
+      - 11300:11300
 volumes:
   db-data:
     driver: local
